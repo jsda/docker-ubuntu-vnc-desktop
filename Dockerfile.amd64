@@ -1,7 +1,7 @@
 ################################################################################
 # base system
 ################################################################################
-ARG image=ubuntu:18.04
+ARG image=ubuntu:latest
 FROM $image as system
 
 ARG localbuild
@@ -22,6 +22,10 @@ RUN apt-get update \
         firefox chromium-browser \
         ttf-ubuntu-font-family ttf-wqy-zenhei \
     && add-apt-repository -r ppa:fcwu-tw/apps \
+    && echo "root:password" | chpasswd \
+    && useradd -d /home/ubuntu -m -U ubuntu \
+    && echo "ubuntu:password" | chpasswd \
+    && usermod -aG sudo ubuntu \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
@@ -94,3 +98,5 @@ ENV HOME=/home/ubuntu \
     SHELL=/bin/bash
 HEALTHCHECK --interval=30s --timeout=5s CMD curl --fail http://127.0.0.1:6079/api/health
 ENTRYPOINT ["/startup.sh"]
+USER ubuntu
+WORKDIR /home/ubuntu
