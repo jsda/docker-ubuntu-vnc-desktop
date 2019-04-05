@@ -109,7 +109,7 @@ COPY image /
 
 RUN apt update \
     && apt install -y --no-install-recommends --allow-unauthenticated \
-    keepassxc filezilla fcitx-rime screen net-tools iputils-ping \
+    keepassxc filezilla fcitx-rime net-tools iputils-ping \
     && echo "root:password" | chpasswd \
     && apt autoclean -y \
     && apt autoremove -y \
