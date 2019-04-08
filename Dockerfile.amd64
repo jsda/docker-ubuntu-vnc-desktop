@@ -114,6 +114,8 @@ RUN apt update \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
+ENV XMODIFIERS="@im=fcitx"
+
 EXPOSE 80
 WORKDIR /root
 ENV HOME=/home/ubuntu \
