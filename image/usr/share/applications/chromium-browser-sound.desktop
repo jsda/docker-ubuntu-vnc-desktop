@@ -127,7 +127,7 @@ Comment[vi]=Truy cập Internet
 Comment[zh_CN]=访问互联网
 Comment[zh_HK]=連線到網際網路
 Comment[zh_TW]=連線到網際網路
-Exec=/usr/local/bin/chromium-browser-sound.sh %U
+Exec=/usr/bin/chromium-browser --user-agent="Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0; en-US) Gecko/20100101 Firefox/63.0" --incognito --no-sandbox --alsa-output-device="$ALSADEV" "$@"
 Terminal=false
 X-MultipleArgs=false
 Type=Application
