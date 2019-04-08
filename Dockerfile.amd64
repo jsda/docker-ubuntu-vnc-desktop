@@ -109,16 +109,20 @@ COPY image /
 
 RUN apt update \
     && apt install -y \
-    keepassxc filezilla fcitx-rime net-tools iputils-ping \
+    keepassxc filezilla fcitx-rime at-spi2-core net-tools iputils-ping \
+    && fcitx -d \
     && apt autoclean -y \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
-ENV XMODIFIERS="@im=fcitx"
-
 EXPOSE 80
 WORKDIR /root
 ENV HOME=/home/ubuntu \
-    SHELL=/bin/bash
+    SHELL=/bin/bash \
+    XIM_PROGRAM=fcitx \
+    XIM=fcitx \
+    GTK_IM_MODULE=fcitx \
+    QT_IM_MODULE=fcitx \
+    XMODIFIERS='@im=fcitx'
 HEALTHCHECK --interval=30s --timeout=5s CMD curl --fail http://127.0.0.1:6079/api/health
 ENTRYPOINT ["/startup.sh"]
